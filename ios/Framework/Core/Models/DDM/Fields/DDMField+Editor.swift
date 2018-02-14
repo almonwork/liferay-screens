@@ -83,10 +83,9 @@ extension DDMField {
 
 			// Capitalize first char
 
-			let secondCharIndex = typeName.characters.index(after: typeName.startIndex)
+			let secondCharIndex = typeName.index(after: typeName.startIndex)
 
-			return typeName.substring(to: secondCharIndex).uppercased() +
-					typeName.substring(from: secondCharIndex)
+			return typeName[..<secondCharIndex].uppercased() + typeName[secondCharIndex...]
 		}
 
 	}

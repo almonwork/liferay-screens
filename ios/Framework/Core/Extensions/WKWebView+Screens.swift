@@ -27,7 +27,7 @@ extension WKWebView {
 				return
 		}
 
-		let jsessionID = authentication.cookieHeader.characters.split(separator: ";")
+		let jsessionID = authentication.cookieHeader.split(separator: ";")
 				.map(String.init).filter { $0.contains("JSESSIONID") }.first
 
 		if let jsessionID = jsessionID {
