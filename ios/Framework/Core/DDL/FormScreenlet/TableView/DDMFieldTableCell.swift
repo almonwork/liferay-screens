@@ -146,7 +146,7 @@ open class DDMFieldTableCell: UITableViewCell {
 	internal func changeDocumentUploadStatus(_ field: DDMFieldDocument) {
 	}
 
-	internal func simpleTapDetected() {
+	@objc internal func simpleTapDetected() {
 		formView?.endEditing(true)
 	}
 

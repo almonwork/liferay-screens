@@ -19,6 +19,7 @@ import Foundation
 #endif
 
 @objc(SessionContext)
+@objcMembers
 open class SessionContext: NSObject {
 
 	open static var currentContext: SessionContext?

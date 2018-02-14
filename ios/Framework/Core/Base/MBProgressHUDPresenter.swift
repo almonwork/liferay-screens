@@ -39,7 +39,7 @@ open class MBProgressHUDPresenter: NSObject, ProgressPresenter {
 	open var customColor: UIColor?
 	open var customOpacity = Float(0.8)
 
-	internal dynamic func simpleTapDetected(_ recognizer: UIGestureRecognizer!) {
+	@objc internal func simpleTapDetected(_ recognizer: UIGestureRecognizer!) {
 		if let hud = recognizer.view as? MBProgressHUD {
 			hud.hide(true)
 			instance = nil
