@@ -67,7 +67,7 @@ open class LoginCookieInteractor: Interactor, LRCallback {
 			}
 		}
 
-		LRCookieSignIn.signIn(with: session, callback: callback, challenge: challenge)
+		_ = try? LRCookieSignIn.signIn(with: session, callback: callback, challenge: challenge)
 		return true
 	}
 

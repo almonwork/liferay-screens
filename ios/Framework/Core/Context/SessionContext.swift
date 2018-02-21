@@ -179,7 +179,7 @@ open class SessionContext: NSObject {
 			}
 		}
 
-		LRCookieSignIn.signIn(with: session, callback: LRCookieBlockCallback { session, error in
+		_ = try? LRCookieSignIn.signIn(with: session, callback: LRCookieBlockCallback { session, error in
 
 			if let session = session {
 				SessionContext.loginWithCookie(authentication: session.authentication as! LRCookieAuthentication,
