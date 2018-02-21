@@ -45,8 +45,13 @@ open class LoginCookieInteractor: Interactor, LRCallback {
 	}
 
 	open override func start() -> Bool {
-		let basicAuth = LRBasicAuthentication(username: emailAddress, password: password)
-		let session = LRSession(server: LiferayServerContext.server, authentication: basicAuth)
+		let cookieAuth = LRCookieAuthentication(authToken: "", cookieHeader: "",
+			username: emailAddress, password: password)!
+
+		cookieAuth.shouldHandleExpiration = shouldHandleCookieExpiration
+		cookieAuth.cookieExpirationTime = cookieExpirationTime
+
+		let session = LRSession(server: LiferayServerContext.server, authentication: cookieAuth)
 
 		let callback = LRCookieBlockCallback { (session, error) in
 			if let session = session {
@@ -79,12 +84,8 @@ open class LoginCookieInteractor: Interactor, LRCallback {
 		if let resultValue = result as? [String:AnyObject] {
 			self.resultUserAttributes = resultValue
 
-			let cookieAuth = cookieSession?.authentication as! LRCookieAuthentication
-			cookieAuth.shouldHandleExpiration = shouldHandleCookieExpiration
-			cookieAuth.cookieExpirationTime = cookieExpirationTime
-
 			SessionContext.loginWithCookie(
-				authentication: cookieAuth,
+				authentication: cookieSession?.authentication as! LRCookieAuthentication,
 				userAttributes: resultValue)
 
 			self.callOnSuccess()
